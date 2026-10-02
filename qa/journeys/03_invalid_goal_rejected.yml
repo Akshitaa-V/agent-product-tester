@@ -1,0 +1,15 @@
+persona: Tom, who mistypes his goal.
+goal: Try to save a weekly goal of 0 and make sure the app refuses it with a clear message.
+user_email: tom@demo.test
+steps:
+  - fill: {label: Work email, text: tom@demo.test}
+  - click: {role: button, name: Sign in}
+  - click: {role: link, name: Set weekly goal}
+  - fill: {label: Sessions per week, text: "0"}
+  - click: {role: button, name: Save goal}
+  - expect: Choose a number between 1 and 14.
+checks:
+  - events: {goal_set: 0}
+  - name: no goal stored
+    sql: "select count(*) from goals where user_id = :user_id"
+    equals: 0

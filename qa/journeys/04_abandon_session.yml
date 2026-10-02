@@ -1,0 +1,14 @@
+persona: Lena, who gets interrupted by a real customer call.
+goal: Set a goal of 2, start a practice session, leave it without answering, and check the weekly progress did not go up.
+user_email: lena@demo.test
+steps:
+  - fill: {label: Work email, text: lena@demo.test}
+  - click: {role: button, name: Sign in}
+  - click: {role: link, name: Set weekly goal}
+  - fill: {label: Sessions per week, text: "2"}
+  - click: {role: button, name: Save goal}
+  - click: {role: button, name: "Start practice: Calming an upset customer"}
+  - click: {role: button, name: Leave session}
+  - expect: "0 of 2 sessions done"
+checks:
+  - events: {session_started: 1, session_abandoned: 1, session_completed: 0}

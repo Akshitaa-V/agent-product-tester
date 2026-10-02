@@ -1,0 +1,15 @@
+persona: Tom, a service rep who wants to practise regularly.
+goal: Set a weekly goal of 3 practice sessions and confirm the dashboard shows it.
+user_email: tom@demo.test
+steps:
+  - fill: {label: Work email, text: tom@demo.test}
+  - click: {role: button, name: Sign in}
+  - click: {role: link, name: Set weekly goal}
+  - fill: {label: Sessions per week, text: "3"}
+  - click: {role: button, name: Save goal}
+  - expect: "0 of 3 sessions done"
+checks:
+  - events: {goal_set: 1}
+  - name: goal stored
+    sql: "select sessions_per_week from goals where user_id = :user_id"
+    equals: 3

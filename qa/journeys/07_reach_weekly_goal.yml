@@ -1,0 +1,17 @@
+persona: Lena, finishing her practice for the week.
+goal: Set a goal of 1, complete one practice session, and confirm the dashboard says the goal is reached.
+user_email: lena@demo.test
+steps:
+  - fill: {label: Work email, text: lena@demo.test}
+  - click: {role: button, name: Sign in}
+  - click: {role: link, name: Set weekly goal}
+  - fill: {label: Sessions per week, text: "1"}
+  - click: {role: button, name: Save goal}
+  - click: {role: button, name: "Start practice: Opening a discovery call"}
+  - fill: {label: Your answer, text: "Thanks for taking the time today. Before I talk about us, I would like to understand your team better. What is the main goal for your sales team this year, and what is the biggest challenge in reaching it? Which priority would you tackle first?"}
+  - click: {role: button, name: Submit answer}
+  - click: {role: link, name: Back to dashboard}
+  - expect: "1 of 1 sessions done"
+  - expect: Goal reached.
+checks:
+  - events: {goal_set: 1, session_completed: 1, feedback_viewed: 1}

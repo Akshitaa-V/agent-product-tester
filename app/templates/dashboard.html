@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}Dashboard{% endblock %}
+{% block nav %}<a href="/goal">Set weekly goal</a>{% endblock %}
+{% block content %}
+<h1>Hi {{ user.name }}</h1>
+
+<section class="card" aria-labelledby="goal-heading">
+  <h2 id="goal-heading">This week</h2>
+  {% if goal %}
+    <p id="goal-status">{{ done }} of {{ goal }} sessions done</p>
+    <progress aria-label="Weekly goal progress" value="{{ [done, goal]|min }}" max="{{ goal }}"></progress>
+    {% if done >= goal %}<p role="status">Goal reached. Nice work.</p>{% endif %}
+  {% else %}
+    <p id="goal-status">{{ done }} sessions done. <a href="/goal">Set a weekly goal</a> to track your practice.</p>
+  {% endif %}
+</section>
+
+<h2>Practice scenarios</h2>
+{% for sc in scenarios %}
+<div class="card">
+  <h3>{{ sc.title }}</h3>
+  <form method="post" action="/sessions">
+    <input type="hidden" name="scenario_id" value="{{ sc.scenario_id }}">
+    <button type="submit" aria-label="Start practice: {{ sc.title }}">Start practice</button>
+  </form>
+</div>
+{% endfor %}
+
+{% if recent %}
+<h2>Recent sessions</h2>
+<ul>
+  {% for r in recent %}
+  <li>{{ r.title }}: {{ r.status }}{% if r.score is not none %}, score {{ r.score }}{% endif %}</li>
+  {% endfor %}
+</ul>
+{% endif %}
+{% endblock %}

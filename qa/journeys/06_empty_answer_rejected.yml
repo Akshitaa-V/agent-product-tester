@@ -1,0 +1,11 @@
+persona: Lena, who clicks submit too early.
+goal: Submit an empty answer and make sure the app asks for an answer instead of scoring it.
+user_email: lena@demo.test
+steps:
+  - fill: {label: Work email, text: lena@demo.test}
+  - click: {role: button, name: Sign in}
+  - click: {role: button, name: "Start practice: Opening a discovery call"}
+  - click: {role: button, name: Submit answer}
+  - expect: Please write an answer before submitting.
+checks:
+  - events: {session_started: 1, session_completed: 0}

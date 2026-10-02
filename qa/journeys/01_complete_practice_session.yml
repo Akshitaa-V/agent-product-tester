@@ -1,0 +1,18 @@
+persona: Lena, a sales rep at an insurance client, practising before a renewal call.
+goal: Finish one practice session on handling a price objection, read the feedback, and get back to the dashboard.
+user_email: lena@demo.test
+steps:
+  - fill: {label: Work email, text: lena@demo.test}
+  - click: {role: button, name: Sign in}
+  - expect: Hi Lena
+  - click: {role: button, name: "Start practice: Handling a price objection"}
+  - fill: {label: Your answer, text: "I understand that cost matters, and I want to make sure the value is clear. Can I ask which parts of the competitor offer you compare with ours? For example, our claims support is included, so the total cost is often lower over a year."}
+  - click: {role: button, name: Submit answer}
+  - expect: "Score:"
+  - click: {role: link, name: Back to dashboard}
+  - expect: "1 sessions done"
+checks:
+  - events: {session_started: 1, session_completed: 1, feedback_viewed: 1}
+  - name: session stored as completed with a score
+    sql: "select count(*) from sessions where user_id = :user_id and status = 'completed' and score is not null"
+    equals: 1

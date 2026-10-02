@@ -1,0 +1,12 @@
+persona: Tom, who writes long, detailed answers.
+goal: Submit a long answer (over 400 characters) to a practice scenario and get feedback.
+user_email: tom@demo.test
+steps:
+  - fill: {label: Work email, text: tom@demo.test}
+  - click: {role: button, name: Sign in}
+  - click: {role: button, name: "Start practice: Calming an upset customer"}
+  - fill: {label: Your answer, text: "I am really sorry that your delivery is three days late, and I understand how frustrating that is when your team is waiting for it. Let me tell you exactly what I am doing next. I have checked the order with our warehouse and the parcel left this morning, so you will have it tomorrow before noon. I will send you an update with the tracking link within the hour. As a solution for the delay, we will cover the shipping cost on this order. Is there anything else on this order that I can sort out for you today?"}
+  - click: {role: button, name: Submit answer}
+  - expect: "Score:"
+checks:
+  - events: {session_completed: 1, feedback_viewed: 1}

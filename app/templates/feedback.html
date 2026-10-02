@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}Feedback{% endblock %}
+{% block content %}
+<h1>Your feedback</h1>
+<p id="score">Score: {{ s.score }} / 100</p>
+{% if tips %}
+<h2>What to work on</h2>
+<ul>{% for t in tips %}<li>{{ t }}</li>{% endfor %}</ul>
+{% else %}
+<p>Strong answer. Try a harder scenario next.</p>
+{% endif %}
+<a class="button" href="/dashboard">Back to dashboard</a>
+{% endblock %}

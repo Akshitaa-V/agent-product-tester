@@ -1,0 +1,59 @@
+{
+  "journeys": 7,
+  "clean_runs_passed": 7,
+  "bugs_planted": 5,
+  "bugs_caught": 5,
+  "browser_runs": 42,
+  "seconds": 48.4,
+  "bugs": [
+    {
+      "bug": "goal_no_validation",
+      "description": "Goal form accepts 0 or negative values.",
+      "caught": true,
+      "caught_by": [
+        "03_invalid_goal_rejected"
+      ],
+      "evidence": "step 6: NOT FOUND: 'Choose a number between 1 and 14.'"
+    },
+    {
+      "bug": "feedback_event_missing",
+      "description": "Opening feedback does not send feedback_viewed.",
+      "caught": true,
+      "caught_by": [
+        "01_complete_practice_session",
+        "05_long_answer",
+        "07_reach_weekly_goal"
+      ],
+      "evidence": "tracking events {'session_started': 1, 'session_completed': 1, 'feedback_viewed': 1}: got {'session_completed': 1, 'session_started': 1}"
+    },
+    {
+      "bug": "progress_counts_abandoned",
+      "description": "Weekly progress also counts abandoned sessions.",
+      "caught": true,
+      "caught_by": [
+        "04_abandon_session"
+      ],
+      "evidence": "step 8: NOT FOUND: '0 of 2 sessions done'"
+    },
+    {
+      "bug": "long_answer_crash",
+      "description": "Answers over 400 characters crash on submit.",
+      "caught": true,
+      "caught_by": [
+        "05_long_answer"
+      ],
+      "evidence": "step 6: NOT FOUND: 'Score:'"
+    },
+    {
+      "bug": "double_completed_event",
+      "description": "Submitting sends session_completed twice.",
+      "caught": true,
+      "caught_by": [
+        "01_complete_practice_session",
+        "05_long_answer",
+        "07_reach_weekly_goal"
+      ],
+      "evidence": "tracking events {'session_started': 1, 'session_completed': 1, 'feedback_viewed': 1}: got {'feedback_viewed': 1, 'session_completed': 2, 'session_started': 1}"
+    }
+  ]
+}
